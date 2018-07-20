@@ -4,13 +4,21 @@ Sends stock prices via SMS.
 
 Usage
 -----
+```
+# install flask, request, twilio libraries
+# TODOs...
+# ./app.py and curl -d "Body=[INSERT STOCK SYMBOL]" -X POST http://://127.0.0.1:5000/sms
+```
 
 TODOs
 -----
 * Connect Twilio phone number to the app
-* Task queue library to allow user to request prices of multiple stocks and set up notifications based on technical indicators
+* Ask user for Alpha Vantage API key instead of using mine
+* Task queue library to allow user to request prices of multiple stocks and set up notifications
 
 What it does
 ------
 
-Currently, stock symbols sent via POST request are looked up using alphavantage API and the current stock price is returned. Goal: use twilio API to send alerts to user based on price movement/technical analysis or price threshold.
+Current: user requests stock price via POST request to [Alpha Vantage API](https://www.alphavantage.co/) and the app returns today's stock price.
+
+Future: app to notify user of stock price based on technical indicators.
