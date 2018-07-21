@@ -14,13 +14,15 @@ Usage
 
 TODOs
 -----
-* Connect Twilio phone number to the app
+* Allow user to request info for multiple stocks
+* Add more useful info in response, such as buy/hold/sell recommendations
 * Ask user for Alpha Vantage API key instead of using mine
-* Task queue library to allow user to request prices of multiple stocks and set up notifications
+* Create alt solution: script that runs periodically, checking for "buy" signals based on technical indicators
+* Task queue library to allow user to set up notifications, such as price target
 
 What it does
 ------
 
 Current: user requests stock price via POST request to [Alpha Vantage API](https://www.alphavantage.co/) and the app returns today's stock price.
 
-Future: app to notify user of stock price based on technical indicators.
+Future: user can request multiple stocks, more useful info than just stock price, task queue library for notifications, a script for personal use
