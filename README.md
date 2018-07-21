@@ -7,7 +7,7 @@ Usage
 ```
 # install flask, request, twilio libraries
 # TODOs...
-# ./app.py and curl -d "Body=[INSERT STOCK SYMBOL]" -X POST http://://127.0.0.1:5000/sms
+# ./app.py and curl -d "Body=[INSERT STOCK SYMBOL]" -X POST http://127.0.0.1:5000/sms
 ```
 
 TODOs
