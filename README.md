@@ -14,7 +14,6 @@ Usage
 
 TODOs
 -----
-* Allow user to request info for multiple stocks
 * Add more useful info in response, such as buy/hold/sell recommendations
 * Ask user for Alpha Vantage API key instead of using mine
 * Create alt solution: script that runs periodically, checking for "buy" signals based on technical indicators
@@ -23,6 +22,6 @@ TODOs
 What it does
 ------
 
-Current: user requests stock price via POST request to [Alpha Vantage API](https://www.alphavantage.co/) and the app returns today's stock price.
+Current: user requests stock price via POST request to [Alpha Vantage API](https://www.alphavantage.co/) and the app returns today's stock price. User can request multiple stock prices in a single message.
 
-Future: user can request multiple stocks, more useful info than just stock price, task queue library for notifications, a script for personal use
+Future: more useful info than just stock price, task queue library for notifications, a script for personal use
