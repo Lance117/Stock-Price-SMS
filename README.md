@@ -2,7 +2,7 @@
 
 Sends stock prices via SMS.
 
-<img src="https://raw.githubusercontent.com/LanceSanity/Stock-Price-SMS/master/screenshot.png" />
+<img width=480px src="https://raw.githubusercontent.com/LanceSanity/Stock-Price-SMS/master/screenshot.png" />
 
 Usage
 -----
