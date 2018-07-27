@@ -7,9 +7,11 @@ Sends stock prices via SMS.
 Usage
 -----
 ```
-# install flask, request, twilio libraries
+# install flask, request, twilio libraries, get Twilio number (if you want the info texted to you)
 # TODOs...
-# ./app.py and curl -d "Body=[INSERT STOCK SYMBOL]" -X POST http://127.0.0.1:5000/sms
+# ./app.py, to test: curl -d "Body=[INSERT STOCK SYMBOL]" -X POST http://127.0.0.1:5000/sms
+# to setup text response w/ Twilio: expose Python app w/ a public URL, configure number to make HTTP request to 
+>> your URL
 ```
 
 TODOs
@@ -22,6 +24,6 @@ TODOs
 What it does
 ------
 
-Current: user requests stock price via POST request to [Alpha Vantage API](https://www.alphavantage.co/) and the app returns today's stock price. User can request multiple stock prices in a single message.
+Current: user requests stock price via POST request to [Alpha Vantage API](https://www.alphavantage.co/) and the app returns today's stock price and RSI. User can request multiple stock prices in a single message.
 
 Future: more useful info than just stock price, task queue library for notifications, a script for personal use
