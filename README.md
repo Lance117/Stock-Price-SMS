@@ -16,7 +16,7 @@ Usage
 
 TODOs
 -----
-* Add more useful info in response, such as buy/hold/sell recommendations
+* Add buy/sell/hold recommendations for trending stocks
 * Ask user for Alpha Vantage API key instead of using mine
 * Create alt solution: script that runs periodically, checking for "buy" signals based on technical indicators
 * Task queue library to allow user to set up notifications, such as price target

@@ -20,9 +20,12 @@ def sms():
         path = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY' \
                '&symbol={}&apikey=' + API_KEY
         path = path.format(symbol)
-        # RSI (or some other technical indicator)
+        # RSI weekly, look-back period=10. RSI = 100-100/(1+RS).
+        # RS=avg gain/avg loss over a period.
+        # How to interpret: >70 indicates overbought, <30 reflects oversold
+        # conditions. Useful for ranging market
         path2 = 'https://www.alphavantage.co/query?function=RSI' \
-                '&symbol={}&interval=weekly&time_period=60&' \
+                '&symbol={}&interval=weekly&time_period=10&' \
                 'series_type=close&apikey=' + API_KEY
         path2 = path2.format(symbol)
         try:
@@ -31,8 +34,15 @@ def sms():
             price = list(r.json()['Time Series (Daily)'].values())[0]['4. close']
             rsi_dict = r2.json()["Technical Analysis: RSI"]
             rsi = list(rsi_dict.values())[0]['RSI']
+            rsi = float(rsi)
+            recommend = 'HOLD'
+            if rsi > 70:
+                recommend = 'SELL'
+            elif rsi < 30:
+                recommend = 'BUY'
             text += 'Current price of {} is: {}\n' \
-                    'RSI is {}\n'.format(symbol, price, rsi)
+                    'RSI is {}. {} (non-trending stocks)\n'.format(symbol,
+                        price, rsi, recommend)
         except:
             text += 'Stock symbol "{}" not found.\n'.format(symbol)
         
