@@ -1,6 +1,6 @@
 # Stock Price SMS
 
-Sends stock prices via SMS.
+Sends stock prices, buy/sell/hold recommendations, and trend strength via SMS.
 
 <img width=360px src="https://raw.githubusercontent.com/LanceSanity/Stock-Price-SMS/master/screenshot1.png" />
 
@@ -16,13 +16,12 @@ Usage
 
 TODOs
 -----
-* Ask user for Alpha Vantage API key instead of using mine
 * Create alt solution: script that runs periodically, checking for "buy" signals based on technical indicators
 * Task queue library to allow user to set up notifications, such as price target
 
 What it does
 ------
 
-Current: user requests stock price via POST request to [Alpha Vantage API](https://www.alphavantage.co/) and the app returns today's stock price and RSI. User can request multiple stock prices in a single message.
+Current: user requests stock price via POST request to [Alpha Vantage API](https://www.alphavantage.co/) and the app returns today's stock price, RSI for buy/sell/hold recommendation, and ADX for trend strength. User can request multiple stock prices in a single message. To get the response via text, configure a Twilio number to make HTTP request to your URL that exposes the app.
 
-Future: more useful info than just stock price, task queue library for notifications, a script for personal use
+Future: task queue library for notifications, a script that runs periodically to send user timely alerts.
