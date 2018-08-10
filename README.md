@@ -7,7 +7,7 @@ Sends stock prices, buy/sell/hold recommendations, and trend strength via SMS.
 Usage
 -----
 ```
-# install flask, request, twilio libraries, get Twilio number (if you want the info texted to you)
+# install flask, requests, twilio libraries [pip3 install requests flask twilio], get Twilio number (if you want the info texted to you)
 # TODOs...
 # ./app.py, to test: curl -d "Body=[INSERT STOCK SYMBOL]" -X POST http://127.0.0.1:5000/sms
 # to setup text response w/ Twilio: expose Python app w/ a public URL, configure number to make HTTP request to 
