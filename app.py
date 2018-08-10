@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""App uses twilio API to respond to user query via text"""
+
 
 import requests
 
@@ -11,6 +13,7 @@ API_KEY = 'EMM4D55C3NQAPPS9'
 
 @app.route('/sms', methods=['POST'])
 def sms():
+    """Method sends stock price info via sms"""
     tickers = request.values.get('Body')
     tickers = tickers.split()
     text = ''
