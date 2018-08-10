@@ -4,6 +4,8 @@
 import csv
 import sys
 
+from twilio.rest import Client
+
 
 def get_stock_list(stocklist=""):
     """Opens file and returns list of stocks"""
@@ -13,6 +15,22 @@ def get_stock_list(stocklist=""):
         for r in reader:
             data.extend(r)
     return data
+
+def send_response():
+    """Sends response from twilio no. to your number"""
+
+    # Your Account Sid and Auth Token from twilio.com/console
+    account_sid = 'ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    auth_token = 'your_auth_token'
+    client = Client(account_sid, auth_token)
+
+    message = clients.messages.create(
+                                    from_='+{YOUR TWILIO NO}',
+                                    body=body,
+                                    to='+{YOUR PHONE NO}'
+                                )
+
+    print(message.sid)
 
 if __name__ == "__main__":
     tickers = get_stock_list('stocklist.csv')
