@@ -9,7 +9,7 @@ from twilio.twiml.messaging_response import Message, MessagingResponse
 
 app = Flask(__name__)
 
-API_KEY = 'EMM4D55C3NQAPPS9'
+API_KEY = '{insert alphavantage API key here}'
 
 @app.route('/sms', methods=['POST'])
 def sms():

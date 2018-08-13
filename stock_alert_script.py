@@ -16,7 +16,7 @@ def get_stock_list(stocklist=""):
             data.extend(r)
     return data
 
-def send_response():
+def send_response(body):
     """Sends response from twilio no. to your number"""
 
     # Your Account Sid and Auth Token from twilio.com/console
@@ -31,6 +31,10 @@ def send_response():
                                 )
 
     print(message.sid)
+
+def create_alert(tickers):
+    """Sends price alerts of given stock tickers"""
+    pass
 
 if __name__ == "__main__":
     tickers = get_stock_list('stocklist.csv')
