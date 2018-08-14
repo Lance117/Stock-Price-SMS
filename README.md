@@ -8,8 +8,9 @@ Usage
 -----
 ```
 # install flask, requests, twilio libraries [pip3 install requests flask twilio], get Twilio number (if you want the info texted to you)
+>> Alpha Vantage API key
 # TODOs...
-# ./app.py, to test: curl -d "Body=[INSERT STOCK SYMBOL]" -X POST http://127.0.0.1:5000/sms
+# ./app.py, to test: curl -d "Body={INSERT STOCK SYMBOL}" -X POST http://127.0.0.1:5000/sms
 # to setup text response w/ Twilio: expose Python app w/ a public URL, configure number to make HTTP request to 
 >> your URL
 ```

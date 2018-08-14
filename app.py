@@ -16,7 +16,6 @@ def sms():
     """Method sends stock price info via sms"""
     tickers = request.values.get('Body')
     tickers = tickers.split()
-    text = ''
     
     # interval for technical indicators
     interval = 'weekly'
@@ -42,38 +41,45 @@ def sms():
                 '&symbol={}&interval={}&time_period=60&apikey={}'
         path3 = path3.format(symbol, interval, API_KEY)
 
+        # Create message
         try:
-            r = requests.get(path)
-            r2 = requests.get(path2)
-            r3 = requests.get(path3)
-            price = list(r.json()['Time Series (Daily)'].values())[0]['4. close']
-            rsi_dict = r2.json()["Technical Analysis: RSI"]
-            rsi = list(rsi_dict.values())[0]['RSI']
-            rsi = float(rsi)
-            adx = list(r3.json()['Technical Analysis: ADX'].values())[0]['ADX']
-            adx = float(adx)
-            recommend = 'HOLD'
-            strength = ''
-            if rsi > 70:
-                recommend = 'SELL'
-            elif rsi < 30:
-                recommend = 'BUY'
-            if adx < 25:
-                strength = 'weak trend'
-            elif adx < 50:
-                strength = 'strong trend'
-            elif adx < 75:
-                strength = 'very strong trend'
-            elif adx <= 100:
-                strength = 'extremely strong trend'
-            text += 'Current price of {} is: {}\n'.format(symbol, price)
-            text += 'RSI is {}. {} (non-trending stocks)\n'.format(rsi, recommend)
-            text += 'ADX is {}. Trend strength: {}\n'.format(adx, strength)
+            text = create_msg(path, path2, path3)
         except:
-            text += 'Stock symbol "{}" not found.\n'.format(symbol)
+            text = 'Stock symbol "${}" not found.\n'.format(symbol)
         
     response.message(text)
     return str(response)
+
+def create_msg(price_json, rsi_json, adx_json):
+    """Returns message to send."""
+    text = ''
+    r = requests.get(path)
+    r2 = requests.get(path2)
+    r3 = requests.get(path3)
+    price = list(r.json()['Time Series (Daily)'].values())[0]['4. close']
+    rsi_dict = r2.json()["Technical Analysis: RSI"]
+    rsi = list(rsi_dict.values())[0]['RSI']
+    rsi = float(rsi)
+    adx = list(r3.json()['Technical Analysis: ADX'].values())[0]['ADX']
+    adx = float(adx)
+    recommend = 'HOLD'
+    strength = ''
+    if rsi > 70:
+        recommend = 'SELL'
+    elif rsi < 30:
+        recommend = 'BUY'
+    if adx < 25:
+        strength = 'weak trend'
+    elif adx < 50:
+        strength = 'strong trend'
+    elif adx < 75:
+        strength = 'very strong trend'
+    elif adx <= 100:
+        strength = 'extremely strong trend'
+    text += 'Current price of {} is: {}\n'.format(symbol, price)
+    text += 'RSI is {}. {} (non-trending stocks)\n'.format(rsi, recommend)
+    text += 'ADX is {}. Trend strength: {}\n'.format(adx, strength)
+    return text
 
 if __name__ == "__main__":
     app.debug = True
