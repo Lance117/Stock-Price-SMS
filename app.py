@@ -22,6 +22,9 @@ def sms():
     
     response = MessagingResponse()
     for symbol in tickers:
+        # Save symbol to file
+        write_to_file(symbol)
+
         # Get current price
         path = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY' \
                '&symbol={}&apikey={}'
@@ -80,6 +83,11 @@ def create_msg(price_json, rsi_json, adx_json):
     text += 'RSI is {}. {} (non-trending stocks)\n'.format(rsi, recommend)
     text += 'ADX is {}. Trend strength: {}\n'.format(adx, strength)
     return text
+
+def write_to_file(ticker):
+    """Saves ticker in file"""
+    with open('stocklist.csv', a) as f:
+        f.write(ticker + '\n')
 
 if __name__ == "__main__":
     app.debug = True

@@ -9,11 +9,9 @@ from twilio.rest import Client
 
 def get_stock_list(stocklist=""):
     """Opens file and returns list of stocks"""
-    data = []
     with open(stocklist) as f:
         reader = csv.reader(f)
-        for r in reader:
-            data.extend(r)
+        data = [ticker[0] for ticker in reader]
     return data
 
 def send_response(body):
