@@ -1,6 +1,6 @@
 # Stock Price SMS
 
-Sends stock prices, buy/sell/hold recommendations, and trend strength via SMS.
+Sends stock prices, buy/sell/hold recommendations, and trend strength via SMS. Purpose: make it easier to retrieve stock prices and recommendation by technical analysis.
 
 <img width=360px src="https://raw.githubusercontent.com/LanceSanity/Stock-Price-SMS/master/screenshot1.png" />
 
