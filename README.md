@@ -1,18 +1,42 @@
 # Stock Price SMS
 
-Sends stock prices, buy/sell/hold recommendations, and trend strength via SMS. Purpose: make it easier to retrieve stock prices and recommendation by technical analysis.
+Sends stock prices, buy/sell/hold recommendations, and trend strength via SMS. Purpose: make it easier to retrieve stock prices and recommendation by technical analysis. Useful if you don't have mobile data. Received help from Twilio's old tutorial: [link](https://www.twilio.com/blog/2016/06/check-stock-prices-with-python-and-twilio-sms.html)
 
 <img width=360px src="https://raw.githubusercontent.com/LanceSanity/Stock-Price-SMS/master/screenshot1.png" />
+
+Setup
+-----
+Install dependencies: `requests` (an HTTP client), `Flask` (Python microframework), `Twilio` helper library
+```
+pip3 install requests flask twilio
+```
+
+Get an AlphaVantage API key
+```
+https://www.alphavantage.co/support/#api-key
+```
+
+Get a Twilio number
+```
+https://www.twilio.com/try-twilio
+```
+
+Get a public URL to expose the app. To test, you can use `ngrok` to assign a public URL
+```
+ngrok http 5000
+```
+
+Configure your Twilio number to make an HTTP request when receiving an SMS
+```
+# Twilio Console > phone numbers > Messaging
+# A MESSAGE COMES IN > webhook > copy over your public URL
+```
 
 Usage
 -----
 ```
-# install flask, requests, twilio libraries [pip3 install requests flask twilio], get Twilio number (if you want the info texted to you)
->> Alpha Vantage API key
-# TODOs...
-# ./app.py, to test: curl -d "Body={INSERT STOCK SYMBOL}" -X POST http://127.0.0.1:5000/sms
-# to setup text response w/ Twilio: expose Python app w/ a public URL, configure number to make HTTP request to 
->> your URL
+# python3 app.py
+# to test: curl -d "Body={INSERT STOCK SYMBOL}" -X POST http://127.0.0.1:5000/sms
 ```
 
 TODOs
