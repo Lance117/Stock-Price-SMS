@@ -9,7 +9,8 @@ from twilio.twiml.messaging_response import Message, MessagingResponse
 
 app = Flask(__name__)
 
-API_KEY = '{insert alphavantage API key here}'
+API_KEY = read_api_key('/')
+url = 'https://www.alphavantage.co/query?'
 
 @app.route('/sms', methods=['POST'])
 def sms():
@@ -25,40 +26,49 @@ def sms():
         # Save symbol to file
         write_to_file(symbol)
 
-        # Get current price
-        path = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY' \
-               '&symbol={}&apikey={}'
-        path = path.format(symbol, API_KEY)
+        # Current price payload
+        price_payload = {
+            'function': 'TIME_SERIES_DAILY',
+            'symbol': symbol,
+            'apikey': API_KEY
+        }
 
         # RSI weekly, look-back period=10
         # https://www.investopedia.com/terms/r/rsi.asp
         # useful for ranging market
-        path2 = 'https://www.alphavantage.co/query?function=RSI' \
-                '&symbol={}&interval={}&time_period=10&' \
-                'series_type=close&apikey={}'
-        path2 = path2.format(symbol, interval, API_KEY)
+        rsi_payload = {
+            'function': 'RSI',
+            'symbol': symbol,
+            'time_period': '10',
+            'series_type': 'close',
+            'apikey': API_KEY
+        }
 
         # ADX: trend strength indicator
         # https://www.investopedia.com/articles/trading/07/adx-trend-indicator.asp
-        path3 = 'https://www.alphavantage.co/query?function=ADX' \
-                '&symbol={}&interval={}&time_period=60&apikey={}'
-        path3 = path3.format(symbol, interval, API_KEY)
+        adx_payload = {
+            'function': 'ADX',
+            'symbol': symbol,
+            'interval': interval,
+            'time_period': '60',
+            'apikey': API_KEY
+        }
 
         # Create message
         try:
-            text = create_msg(path, path2, path3)
+            text = create_msg(price_payload, rsi_payload, adx_payload)
         except:
             text = 'Stock symbol "${}" not found.\n'.format(symbol)
         
     response.message(text)
     return str(response)
 
-def create_msg(price_json, rsi_json, adx_json):
+def create_msg(price_payload, rsi_payload, adx_payload):
     """Returns message to send."""
     text = ''
-    r = requests.get(path)
-    r2 = requests.get(path2)
-    r3 = requests.get(path3)
+    r = requests.get(url, params=price_payload)
+    r2 = requests.get(url, params=rsi_payload)
+    r3 = requests.get(url, params=adx_payload)
     price = list(r.json()['Time Series (Daily)'].values())[0]['4. close']
     rsi_dict = r2.json()["Technical Analysis: RSI"]
     rsi = list(rsi_dict.values())[0]['RSI']
@@ -88,6 +98,12 @@ def write_to_file(ticker):
     """Saves ticker in file"""
     with open('stocklist.csv', a) as f:
         f.write(ticker + '\n')
+
+def read_api_key(filepath):
+    """Read API key from file."""
+    with open('api_key.txt', 'r') as f:
+        return f.read().replace('\n', '')
+
 
 if __name__ == "__main__":
     app.debug = True
