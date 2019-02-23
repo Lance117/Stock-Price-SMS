@@ -3,6 +3,7 @@
 
 
 import requests
+import time
 
 from flask import Flask, request
 from twilio.twiml.messaging_response import Message, MessagingResponse
@@ -59,6 +60,9 @@ def sms():
             text = create_msg(price_payload, rsi_payload, adx_payload)
         except:
             text = 'Stock symbol "${}" not found.\n'.format(symbol)
+
+        # Rate limiter: 5 requests per minute
+        time.sleep(60)
         
     response.message(text)
     return str(response)
