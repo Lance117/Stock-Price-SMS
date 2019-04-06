@@ -11,7 +11,7 @@ Install dependencies: `requests` (an HTTP client), `Flask` (Python microframewor
 pip3 install requests flask twilio
 ```
 
-Get an AlphaVantage API key
+Get an AlphaVantage API key, write to file called "api_key.txt" (in the project's root directory)
 ```
 https://www.alphavantage.co/support/#api-key
 ```
